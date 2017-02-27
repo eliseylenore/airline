@@ -44,6 +44,17 @@ namespace AirlineApp
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void Test_Find()
+        {
+            Flight newFlight = new Flight("1", "On time", "6:30 PM");
+            newFlight.Save();
+
+            Flight result = Flight.Find(newFlight.GetId());
+
+            Assert.Equal(newFlight, result);
+        }
+
         public void Dispose()
         {
             Flight.DeleteAll();

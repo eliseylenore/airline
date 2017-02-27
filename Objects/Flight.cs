@@ -93,6 +93,45 @@ namespace AirlineApp
             }
         }
 
+        public static Flight Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM flights WHERE id = @FlightId;", conn);
+
+            SqlParameter flightIdParameter = new SqlParameter();
+            flightIdParameter.ParameterName = "@FlightId";
+            flightIdParameter.Value = id.ToString();
+            cmd.Parameters.Add(flightIdParameter);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundFlightId = 0;
+            string foundFlightNum = null;
+            string foundFlightStatus = null;
+            string foundFlightTime = null;
+
+            while(rdr.Read())
+            {
+                foundFlightId = rdr.GetInt32(0);
+                foundFlightNum = rdr.GetString(1);
+                foundFlightStatus = rdr.GetString(2);
+                foundFlightTime = rdr.GetString(3);
+            }
+
+            Flight foundFlight = new Flight(foundFlightNum, foundFlightStatus, foundFlightTime, foundFlightId);
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return foundFlight;
+
+        }
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();

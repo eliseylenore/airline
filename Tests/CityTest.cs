@@ -76,6 +76,7 @@ namespace AirlineApp
 
         public void Dispose()
         {
+            Flight.DeleteAll();
             City.DeleteAll();
         }
     }

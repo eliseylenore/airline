@@ -1,0 +1,44 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+<div class="row">
+    @if(Model["Flights"] == null)
+    {
+        <p>There are no flights available</p>
+    }
+    else
+    {
+        @foreach(var flight in Model["Flights"])
+        {
+            <div class="flights z-depth-4">
+                <p>Flight Number: @flight.GetFlightNum()</p>
+                <p>Departure: @flight.GetCities()[0].GetName()</p>
+                <p>Arrival: @flight.GetCities()[1].GetName()</p>
+                <p>Status: @flight.GetStatus()</p>
+                <p>Time: @flight.GetTime()</p>
+                <form action="/delete/@flight.GetId()" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn">Delete</button>
+                </form>
+                <div class="row">
+                    <div class="input-field col s3">
+                    <form action="/edit/@flight.GetId()" method="post">
+                        <input type="hidden" name="_method" value="PATCH">
+                            <select name="status">
+                                <option disabled selected>Update Flight Status</option>
+                                <option>On time</option>
+                                <option>Delayed</option>
+                                <option>Cancelled</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="row">
+    <a class="btn" href="/add-cities">Add cities</a>
+    <a class="btn" href="/add-flights">Add flight</a>
+</div>

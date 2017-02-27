@@ -78,14 +78,21 @@ namespace AirlineApp
             City arrival = new City("New York");
             arrival.Save();
 
-            newFlight.AddFlight(departure.GetId(), arrival.GetId());
+            newFlight.AddFlight(departure, arrival);
+            List<City> expected = new List<City>();
+            expected.Add(departure);
+            expected.Add(arrival);
+            List<City> actual = newFlight.GetCities();
 
-
+            Assert.Equal(expected, actual);
         }
+
+
 
         public void Dispose()
         {
             Flight.DeleteAll();
+            City.DeleteAll();
         }
 
     }

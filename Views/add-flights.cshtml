@@ -1,0 +1,38 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+
+<div class="input-field">
+    <form action="/add-flights" method="post">
+        <input type="text" name="flight-num" placeholder="Flight Number">
+        <div class="input-field">
+            <select name="flight-status">
+                <option disabled selected>Flight Status</option>
+                <option>On time</option>
+                <option>Delayed</option>
+                <option>Cancelled</option>
+            </select>
+        </div>
+        <input type="text" name="flight-time" placeholder="Flight Time">
+
+        <div class="input-field">
+        <select name="departure">
+            <option disabled selected>Select Place of Departure</option>
+            @foreach(var city in @Model["Cities"])
+            {
+                <option value="@city.GetId()">@city.GetName()</option>
+            }
+        </select>
+        </div>
+        <div class="input-field">
+        <select name="arrival">
+            <option disabled selected>Select Destination</option>
+            @foreach(var city in @Model["Cities"])
+            {
+                <option value="@city.GetId()">@city.GetName()</option>
+            }
+        </select>
+        </div>
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</div>

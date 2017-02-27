@@ -23,9 +23,34 @@ namespace AirlineApp
             Assert.Equal(0, result);
         }
 
+        [Fact]
+        public void Test_EqualOverride()
+        {
+            //Arrange, Act
+            City firstCity = new City("Atlanta");
+            City secondCity = new City("Atlanta");
+
+            //Assert
+            Assert.Equal(firstCity, secondCity);
+        }
+
+        [Fact]
+        public void Test_Save()
+        {
+            //Arrange, Act
+            City newCity = new City("Atlanta");
+            newCity.Save();
+
+            List<City> expected = new List<City>{newCity};
+            List<City> actual = City.GetAll();
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
         public void Dispose()
         {
-            
+            City.DeleteAll();
         }
     }
 }

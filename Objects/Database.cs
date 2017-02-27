@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace ToDoListSql
+namespace AirlineApp
 {
   public class DB
   {

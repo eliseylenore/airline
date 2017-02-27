@@ -5,7 +5,7 @@ using Nancy;
 using Nancy.Owin;
 using Nancy.ViewEngines.Razor;
 
-namespace ToDoListSql
+namespace AirlineApp
 {
   public class Startup
   {

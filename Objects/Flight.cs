@@ -132,6 +132,26 @@ namespace AirlineApp
 
         }
 
+        public void Delete()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM flights WHERE id = @FlightId;", conn);
+
+            SqlParameter idParameter = new SqlParameter();
+            idParameter.ParameterName = "@FlightId";
+            idParameter.Value = this.GetId();
+            
+            cmd.Parameters.Add(idParameter);
+
+            cmd.ExecuteNonQuery();
+            if(conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();

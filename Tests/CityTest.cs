@@ -48,6 +48,32 @@ namespace AirlineApp
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void Test_Find()
+        {
+            City newCity = new City("Atlanta");
+            newCity.Save();
+
+            City foundCity = City.Find(newCity.GetId());
+
+            Assert.Equal(newCity, foundCity);
+        }
+
+        [Fact]
+        public void Test_Delete()
+        {
+            City newCity = new City("Atlanta");
+            newCity.Save();
+
+            newCity.Delete();
+
+            List<City> expected = new List<City>{};
+            List<City> actual = City.GetAll();
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
         public void Dispose()
         {
             City.DeleteAll();

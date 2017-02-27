@@ -67,6 +67,41 @@ namespace AirlineApp
             }
         }
 
+        public static City Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM cities WHERE id=@CityId;", conn);
+
+            SqlParameter idParameter = new SqlParameter();
+            idParameter.ParameterName = "@CityId";
+            idParameter.Value = id;
+            cmd.Parameters.Add(idParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundId = 0;
+            string foundName = null;
+
+            while(rdr.Read())
+            {
+                foundId = rdr.GetInt32(0);
+                foundName = rdr.GetString(1);
+            }
+            City foundCity = new City(foundName, foundId);
+
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+            if(conn != null)
+            {
+                conn.Close();
+            }
+
+            return foundCity;
+        }
+
         public static List<City> GetAll()
         {
             SqlConnection conn = DB.Connection();
@@ -95,6 +130,27 @@ namespace AirlineApp
             }
 
             return AllCities;
+
+        }
+
+        public void Delete()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM cities WHERE id = @CityId;", conn);
+
+            SqlParameter cityId = new SqlParameter();
+            cityId.ParameterName = "@CityId";
+            cityId.Value = this._id;
+            cmd.Parameters.Add(cityId);
+
+            cmd.ExecuteNonQuery();
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
 
         }
 

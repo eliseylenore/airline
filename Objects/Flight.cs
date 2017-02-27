@@ -55,6 +55,53 @@ namespace AirlineApp
             return _id;
         }
 
+        public void Save()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("INSERT INTO flights (flight_number, status, time) OUTPUT INSERTED.id VALUES (@FlightNum, @FlightStatus, @FlightTime);", conn);
+
+            SqlParameter flightNumParameter = new SqlParameter();
+            flightNumParameter.ParameterName = "@FlightNum";
+            flightNumParameter.Value = this._flightNum;
+            cmd.Parameters.Add(flightNumParameter);
+
+            SqlParameter flightStatusParameter = new SqlParameter();
+            flightStatusParameter.ParameterName = "@FlightStatus";
+            flightStatusParameter.Value = this._status;
+            cmd.Parameters.Add(flightStatusParameter);
+
+            SqlParameter flightTimeParameter = new SqlParameter();
+            flightTimeParameter.ParameterName = "@FlightTime";
+            flightTimeParameter.Value = this._time;
+            cmd.Parameters.Add(flightTimeParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this._id = rdr.GetInt32(0);
+            }
+
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+            if(conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+        public static void DeleteAll()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM flights;", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
         public static List<Flight> GetAll()
         {
             List<Flight> allFlights = new List<Flight>{};

@@ -32,9 +32,21 @@ namespace AirlineApp
             Assert.Equal(firstFlight, secondFlight);
         }
 
+        [Fact]
+        public void Test_Save()
+        {
+            Flight newFlight = new Flight("1", "On time", "6:30 PM");
+            newFlight.Save();
+
+            List<Flight> expected = new List<Flight>{newFlight};
+            List<Flight> actual = Flight.GetAll();
+
+            Assert.Equal(expected, actual);
+        }
+
         public void Dispose()
         {
-
+            Flight.DeleteAll();
         }
 
     }

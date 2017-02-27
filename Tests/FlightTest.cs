@@ -68,6 +68,21 @@ namespace AirlineApp
 
         }
 
+        [Fact]
+        public void TestAddCitiesToFlightAndFindFlight()
+        {
+            Flight newFlight = new Flight("1", "On time", "6:30 PM");
+            newFlight.Save();
+            City departure = new City("Atlanta");
+            departure.Save();
+            City arrival = new City("New York");
+            arrival.Save();
+
+            newFlight.AddFlight(departure.GetId(), arrival.GetId());
+
+
+        }
+
         public void Dispose()
         {
             Flight.DeleteAll();

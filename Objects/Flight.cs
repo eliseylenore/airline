@@ -132,6 +132,16 @@ namespace AirlineApp
 
         }
 
+        public void AddFlight(City DepartureCity, City ArrivalCity)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO cities_flights(departure_city_id, arrival_city_id, flight_id) VALUES (@DepartureCityId, @ArrivalCityId, @FlightId);" conn);
+
+            //ADD PARAMETERS NEXT
+        }
+
         public void Delete()
         {
             SqlConnection conn = DB.Connection();
@@ -142,7 +152,7 @@ namespace AirlineApp
             SqlParameter idParameter = new SqlParameter();
             idParameter.ParameterName = "@FlightId";
             idParameter.Value = this.GetId();
-            
+
             cmd.Parameters.Add(idParameter);
 
             cmd.ExecuteNonQuery();

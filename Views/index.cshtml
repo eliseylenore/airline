@@ -10,7 +10,7 @@
     {
         @foreach(var flight in Model["Flights"])
         {
-            <div class="flights z-depth-4">
+            <div class="row flights z-depth-4">
                 <div class="row valign-wrapper">
                     <p class="flow-text col s4">Flight Number: @flight.GetFlightNum()</p>
                     <p class="col s2">Departure: @flight.GetCities()[0].GetName()</p>
@@ -41,6 +41,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 }

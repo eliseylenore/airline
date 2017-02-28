@@ -11,8 +11,19 @@
     <title>AirlineApp</title>
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper green lighten-3">
+            <a href="/" class="brand-logo">FlightTracker</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/add-cities">Add City</a></li>
+                <li><a href="/add-flights">Add Flight</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        @RenderBody()        
+        <div class="row body-row">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

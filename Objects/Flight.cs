@@ -232,10 +232,17 @@ namespace AirlineApp
 
             SqlCommand cmd = new SqlCommand("UPDATE flights SET status = @NewStatus WHERE id=@FlightId;", conn);
 
+
             SqlParameter statusParameter = new SqlParameter();
             statusParameter.ParameterName = "@NewStatus";
+            try
+            {
             statusParameter.Value = status;
-
+            }
+            finally
+            {
+                statusParameter.Value = "invalid";
+            }
             SqlParameter flightIdParameter = new SqlParameter();
             flightIdParameter.ParameterName = "@FlightId";
             flightIdParameter.Value = this.GetId();

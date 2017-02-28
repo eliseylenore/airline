@@ -5,3 +5,11 @@ body {
 .flights {
     padding: 3%;
 }
+
+.body-row {
+    margin-top: 4%;
+}
+
+.nav-wrapper {
+    padding: 0 2% 0 2%;
+}

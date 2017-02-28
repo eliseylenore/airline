@@ -28,7 +28,7 @@
                                 <option>Delayed</option>
                                 <option>Cancelled</option>
                             </select>
-                            <button type="submit" class="btn">Submit</button>
+                            <button type="submit" class="btn deep-orange lighten-1">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="col s3">
                         <form action="/delete/@flight.GetId()" method="post">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn">Delete</button>
+                            <button type="submit" class="btn deep-orange lighten-1">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -44,7 +44,3 @@
         </div>
     }
 }
-<div class="row">
-    <a class="btn" href="/add-cities">Add cities</a>
-    <a class="btn" href="/add-flights">Add flight</a>
-</div>
